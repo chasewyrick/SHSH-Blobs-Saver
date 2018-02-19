@@ -1,20 +1,38 @@
 <?php
-if(isset($_POST['device'])) {
-$device = htmlspecialchars($_POST['device']);
+$validinput = true;
+if (isset($_POST['device']) && trim($_POST['device']) != '') {
+    $device = htmlspecialchars($_POST['device']);
+} else {
+    $validinput = false;
+    $device = 'Unknown';
 }
-if(isset($_POST['ecid'])) {
-$ecid = htmlspecialchars($_POST['ecid']);
+if (isset($_POST['ecid']) && trim($_POST['ecid']) != '') {
+    if (ctype_alnum($_POST['ecid'])) {
+        $ecid = $_POST['ecid'];
+    } else {
+        $validinput = false;
+    	$ecid = 'Unknown';
+    }
+} else {
+    $validinput = false;
+    $ecid = 'Unknown';
 }
-if(isset($_POST['version'])) {
-$version = htmlspecialchars($_POST['version']);
+if (isset($_POST['version']) && trim($_POST['version']) != '') {
+    $version = htmlspecialchars($_POST['version']);
+} else {
+    $validinput = false;
+    $version = 'Unknown';
 }
-if(isset($_POST['boardconfig'])) {
-$boardconfig = htmlspecialchars($_POST['boardconfig']);
+if (isset($_POST['boardconfig']) && trim($_POST['boardconfig']) != '') {
+    $boardconfig = htmlspecialchars($_POST['boardconfig']);
+} else {
+    $validinput = false;
+    $boardconfig = 'Unknown';
 }
 ?>
 
 <!DOCTYPE html>
-<html> 
+<html lang="en"> 
 <head>
 	<meta name = "viewport" content = "width = device-width">
 </head>
@@ -30,10 +48,14 @@ ECID: <?php echo $ecid;?><br>
 
 
 
-<?php  
- shell_exec('mkdir SHSH/'.escapeshellarg($ecid).'');
- shell_exec('cp -i blobs.php SHSH/'.escapeshellarg($ecid).'');
- shell_exec('./tsschecker_linux -d '.escapeshellarg($device).' -i '.escapeshellarg($version).' -e '.escapeshellarg($ecid).' —boardconfig '.escapeshellarg($boardconfig).' -s --save-path SHSH/'.escapeshellarg($ecid).'');
+<?php
+ if ($validinput) {
+     shell_exec('mkdir SHSH/'.escapeshellarg($ecid).'');
+     shell_exec('cp -i blobs.php SHSH/'.escapeshellarg($ecid).'');
+     shell_exec('./tsschecker_linux -d '.escapeshellarg($device).' -i '.escapeshellarg($version).' -e '.escapeshellarg($ecid).' —boardconfig '.escapeshellarg($boardconfig).' -s --save-path SHSH/'.escapeshellarg($ecid).'');
+ } else {
+     echo '<span style="color:red;">Invalid parameters.</span>';
+ }
 ?>
 
 
