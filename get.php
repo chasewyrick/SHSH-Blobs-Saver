@@ -88,7 +88,7 @@ button{
  if ($validinput) {
      shell_exec('mkdir SHSH/'.escapeshellarg($ecid).'');
      shell_exec('cp -i blobs.php SHSH/'.escapeshellarg($ecid).'');
-     shell_exec('./tsschecker_macos -d '.escapeshellarg($device).' -i '.escapeshellarg($version).' -e '.escapeshellarg($ecid).' —boardconfig '.escapeshellarg($boardconfig).' -s --save-path SHSH/'.escapeshellarg($ecid).'');
+     shell_exec('./tsschecker_linux -d '.escapeshellarg($device).' -i '.escapeshellarg($version).' -e '.escapeshellarg($ecid).' —boardconfig '.escapeshellarg($boardconfig).' -s --save-path SHSH/'.escapeshellarg($ecid).'');
  } else {
      echo '<span style="color:red;">Invalid parameters.</span>';
  }
