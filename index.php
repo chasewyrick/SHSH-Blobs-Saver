@@ -69,7 +69,7 @@ function changeText2(){
 
 </script>
 
-Here is your blobs: <a href="" id=lnk></a> <br>
+Here are your blobs: <a href="" id=lnk></a> <br>
 <input type='text' id='userInput' placeholder="ECID" /><br></br>
 <button onclick='changeText2()'/>Find Your Blobs</button>
 <br></br>
