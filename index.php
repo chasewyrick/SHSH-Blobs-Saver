@@ -11,7 +11,6 @@
             background-color: #eeeeee;
             margin: 0;
             font-family: arial;
-            overflow-x: hidden;
         }
         
         input {
